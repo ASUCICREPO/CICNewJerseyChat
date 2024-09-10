@@ -50,8 +50,8 @@ class NjCdkAppStack(Stack):
 
         #vpc for lambda
 
-        vpc = ec2.Vpc.from_lookup(self, "VPC", vpc_id=vpc_id())
-        subnet = ec2.Subnet.from_subnet_id(self, "subnet", subnet_id=vpc_subnet_id())
+        vpc = ec2.Vpc.from_lookup(self, "VPC", vpc_id=vpc_id)
+        subnet = ec2.Subnet.from_subnet_id(self, "subnet", subnet_id=vpc_subnet_id)
 
         # Create a lambda function to list the models
         list_models = _lambda.Function(
