@@ -1,77 +1,118 @@
+# New Jersey Chat Application Deployment Guide
 
-# Deploy the CDK Code for the Backend
+This guide provides instructions for deploying the backend CDK code and the frontend React application for the New Jersey Chat project.
 
-## Initial Setup
+## Backend Deployment (CDK)
 
-1. Go to the console home for the account you want to deploy the application inside, and in the top right, next to the bell icon, open a new cloudshell.
+### Initial Setup
 
+1. Open AWS CloudShell in your target account.
 2. Clone the repository:
    ```
    git clone https://github.com/ASUCICREPO/NewJerseyChatCDK
    ```
-   The repo can be found here for separate use: https://github.com/ASUCICREPO/NewJerseyChatCDK 
-
-3. Move into the cdk code project directory:
+3. Navigate to the project directory:
    ```
-   cd nj-cdk-app
+   cd NewJerseyChatCDK/nj-cdk-app
    ```
-
-4. Initialize the account for cdk deployments:
-   ```
-   cdk bootstrap
-   ```
-
-5. Create and activate the .venv environment:
+4. Set up the Python virtual environment:
    ```
    python3 -m venv .venv
    source .venv/bin/activate
    ```
-   You'll know it worked if a "(.venv)" appears at the start of the command line.
-
-6. Install project dependencies:
+5. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-## Configure Constants
+### Configure Constants
 
-1. Move to the directory where the main code and config are stored:
+1. Navigate to the code directory:
    ```
    cd nj_cdk_app
    ```
-
-2. Open the config file:
+2. Edit the config file:
    ```
    nano config.py
    ```
+3. Update the following constants:
+   - `vpc_id`
+   - `vpc_subnet_id`
+   - `account` (your AWS account number)
+   - `region` (default is "us-east-1")
+4. Save and exit (Ctrl+X, then Y, then Enter)
 
-3. Fill in the following constants:
-   - `vpc_id`: Find this by searching for VPC in the console home
-   - `vpc_subnet_id`: Find this in the Subnets section
-   - `account`: Your AWS account number (found in the top right profile section)
-   - `region`: Default is "us-east-1" (change only if needed)
+### Deploy
 
-4. Save and exit the text editor:
-   - Press `Ctrl+X`
-   - Confirm with `Y`
-   - Press `Enter` to keep the filename as config.py
-
-## Final Deploy
-
-1. Move back to the main directory:
+1. Return to the main directory:
    ```
    cd ..
    ```
-
-2. Deploy the CDK stack:
+2. Bootstrap the CDK (if not done before):
+   ```
+   cdk bootstrap
+   ```
+3. Deploy the stack:
    ```
    cdk deploy
    ```
+4. Confirm the deployment when prompted.
+5. Save the output URLs for frontend deployment.
 
-3. Review the plan template and confirm the deploy with `y`.
+**Note:** Ensure that 3 VPC endpoints (S3, bedrock-runtime, and bedrock) are created and attached to the VPC and subnet used before deployment.
 
-4. The deployment will take approximately 5-10 minutes.
+## Frontend Deployment
 
-5. Once finished, save the two URLs from the "Outputs:" section for use in the frontend deployment.
+### Prerequisites
 
-**NOTE:** Prior to this deployment, ensure that 3 VPC endpoints are created and attached to the VPC and subnet used. They should be for S3, the bedrock-runtime, and bedrock.
+1. Install Node.js and npm from [https://nodejs.org](https://nodejs.org)
+2. Verify installation:
+   ```
+   node -v
+   npm -v
+   ```
+
+### Setup and Build
+
+1. Download the frontend zipped folder from the provided Presigned URL.
+2. Open the folder in VS Code and open a terminal.
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Update the `.env` file with the correct URLs:
+   - `REACT_APP_MODEL_INFORMATIONS`: List models functional URL
+   - `REACT_APP_CONVERSE_API`: Converse bedrock functional URL
+5. Test the app locally:
+   ```
+   npm start
+   ```
+6. Build the app:
+   ```
+   npm run build
+   ```
+7. Install Amplify CLI:
+   ```
+   npm install -g @aws-amplify/cli
+   ```
+
+### Package for Deployment
+
+1. Navigate to the build folder:
+   ```
+   cd build
+   ```
+2. Zip the contents:
+   ```
+   zip -r nj-ai-app-build.zip ./*
+   ```
+
+### Deploy with AWS Amplify
+
+1. Open the AWS Amplify Console.
+2. Click "Create new app" > "Deploy without Git" > Next.
+3. Name your application.
+4. Drag and drop the `nj-ai-app-build.zip` file.
+5. Click "Deploy".
+6. Monitor the deployment process.
+7. Use the provided URL to access your hosted React app.
