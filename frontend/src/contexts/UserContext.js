@@ -11,17 +11,17 @@ export const UserProvider = ({ children, user }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [username, setUsername] = useState("");
 
-   // Function to fetch current session and get access token
-   const fetchAccessToken = async () => {
-    try {
-      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      // const token = session.getAccessToken().getJwtToken();  // Get access token
-      // setAccessToken(token);  // Set access token in state
-      console.log("Access Token:", idToken, accessToken);
-    } catch (err) {
-      console.log("Error fetching access token:", err);
-    }
-  };
+  //  // Function to fetch current session and get access token
+  //  const fetchAccessToken = async () => {
+  //   try {
+  //     const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+  //     // const token = session.getAccessToken().getJwtToken();  // Get access token
+  //     // setAccessToken(token);  // Set access token in state
+  //     console.log("Access Token:", idToken, accessToken);
+  //   } catch (err) {
+  //     console.log("Error fetching access token:", err);
+  //   }
+  // };
 
 
   // Login function to be called when a user logs in
@@ -37,7 +37,7 @@ export const UserProvider = ({ children, user }) => {
     localStorage.setItem("isAdmin", isAdminUser);
 
     // Fetch and set the access token for the logged-in user
-    fetchAccessToken();
+    // fetchAccessToken();
   };
 
   // Logout function to be called when a user logs out
