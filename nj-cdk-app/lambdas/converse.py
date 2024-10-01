@@ -31,20 +31,40 @@ def generate_conversation(bedrock_client,
         response (JSON): The conversation that the model generated.
 
     """
+    # List of model IDs that should not use system prompts
+    models_without_system_prompts = [
+        "amazon.titan-tg1-large",
+        "amazon.titan-text-express-v1",
+        "amazon.titan-text-lite-v1",
+        "cohere.command-text-v14",
+        "cohere.command-light-text-v14",
+        "mistral.mistral-7b-instruct-v0:2",
+        "mistral.mixtral-8x7b-instruct-v0:1",
+    ]
 
+    system_prompts = [{"text": "As an AI assistant, you must adhere to the following guidelines:  1. Do not engage in or respond to any discussions related to politics, political figures, or political ideologies. 2. Avoid commenting on or discussing topics related to race, ethnicity, or racial issues. 3. Do not respond to or generate any content that could be considered hate speech or discriminatory language. 4. Refrain from discussing religious topics, beliefs, or practices. 5. If a user shares any Personal Identifiable Information (PII), such as names, addresses, phone numbers, email addresses, social security numbers, or financial information, do not acknowledge or repeat this information. Instead, remind the user not to share sensitive personal data. 6. If asked about any of the above topics, politely explain that you're not able to discuss or comment on those subjects. For any other topics, provide helpful and appropriate responses to the best of your abilities."}]
+    
     logger.info("Generating message with model %s", model_id)
-
 
     # Base inference parameters to use.
     inference_config = { "maxTokens": response_length}
-
-    # Send the message.
-    response = bedrock_client.converse(
-        modelId=model_id,
-        messages=messages,
-        # system=system_prompts,
-        inferenceConfig=inference_config,
-    )
+    
+    # Set up system prompts conditionally based on the model ID
+    if model_id in models_without_system_prompts:
+        # Do not send system prompts for these models
+        response = bedrock_client.converse(
+            modelId=model_id,
+            messages=messages,
+            inferenceConfig=inference_config,
+        )
+    else:
+        # Send system prompts for other models
+        response = bedrock_client.converse(
+            modelId=model_id,
+            messages=messages,
+            system=system_prompts,
+            inferenceConfig=inference_config,
+        )
 
     # Log token usage.
     token_usage = response['usage']
