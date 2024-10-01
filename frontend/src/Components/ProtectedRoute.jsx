@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   // If the user is not an admin, redirect them to the chat page
   if (!isAdmin) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/chat" replace />;
   }
 
   // If the user is an admin, let them go to the slect models page
