@@ -9,6 +9,10 @@ import LeftNav from "../Components/LeftNav";
 import RightNav from "../Components/RightNav";
 import ChatBody from '../Components/ChatBody';
 import Logo from "../Assets/header_logo.jpg";
+import { Typography} from "@mui/material";
+import {
+  TEXT, primary_50
+} from "../utilities/constants"; // Adjust the import path
 
 const drawerWidthLeftNav = 350;
 const drawerWidthRightNav = 260;
@@ -84,8 +88,15 @@ const ChatBot = ({signOut}) => {
               >
                 <MenuIcon />
               </IconButton>
-
-              <img src={Logo} alt={`App main Logo`} height={64} />
+              {/* App name and app logo */}
+              <img src={Logo} alt={`App main Logo`} height={74} />
+              <Typography 
+                variant="h3" 
+                sx={{ marginLeft: 2, flexGrow: 1 }}
+                color={primary_50}
+              >
+                {TEXT.EN.APP_NAME}
+              </Typography>
             </Box>
             {/* Right side (right nav icon button aligned to the right) */}
             <IconButton

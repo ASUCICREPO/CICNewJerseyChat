@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------//
 // Primary color constants for the theme
-export const PRIMARY_MAIN = "#444E56"; // The main primary color used for buttons, highlights, etc.
-export const primary_50 = "#069ede"; // The 50 variant of the primary color
+export const PRIMARY_MAIN = "#444E56"; // 
+export const primary_50 = "#1c7ec3"; // The main primary color used for buttons, highlights, etc.
 
 // Background color constants
 export const SECONDARY_MAIN = "#D3D3D3"; // The main secondary color used for less prominent elements

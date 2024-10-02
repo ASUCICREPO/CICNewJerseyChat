@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import {
   TEXT,
-} from "../utilities/constants"; // Adjust the import path
+} from "../utilities/constants"; 
 
 function LeftNav({ drawerWidth, mobileOpen, handleDrawerClose, handleDrawerTransitionEnd }) {
   const aboutUsContent = TEXT.EN.ABOUT_US;

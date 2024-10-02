@@ -3,7 +3,7 @@ import { PRIMARY_MAIN, SECONDARY_MAIN, CHAT_BODY_BACKGROUND, CHAT_LEFT_PANEL_BAC
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+    fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
   },
   palette: {
     primary: {
