@@ -1,6 +1,6 @@
-# New Jersey Chat Application Deployment Guide
+# Interactive Chat Application Deployment Guide
 
-This guide provides instructions for deploying the backend CDK code and the frontend React application for the New Jersey Chat project.
+This guide provides instructions for deploying the backend CDK code and the frontend React application for the Interactive Chat project.
 
 ## Backend Deployment (CDK)
 
@@ -9,11 +9,11 @@ This guide provides instructions for deploying the backend CDK code and the fron
 1. Open AWS CloudShell in your target account.
 2. Clone the repository:
    ```
-   git clone https://github.com/ASUCICREPO/NewJerseyChatCDK
+   git clone https://github.com/ASUCICREPO/CICInteractiveChat
    ```
 3. Navigate to the project directory:
    ```
-   cd NewJerseyChatCDK/nj-cdk-app
+   cd InteractiveChatCDK/Interactive-cdk-app
    ```
 4. Set up the Python virtual environment:
    ```
@@ -29,7 +29,7 @@ This guide provides instructions for deploying the backend CDK code and the fron
 
 1. Navigate to the code directory:
    ```
-   cd nj_cdk_app
+   cd Interactive_cdk_app
    ```
 2. Edit the config file:
    ```
@@ -104,7 +104,7 @@ This guide provides instructions for deploying the backend CDK code and the fron
    ```
 2. Zip the contents:
    ```
-   zip -r nj-ai-app-build.zip ./*
+   zip -r Interactive-ai-app-build.zip ./*
    ```
 
 ### Deploy with AWS Amplify
@@ -112,7 +112,7 @@ This guide provides instructions for deploying the backend CDK code and the fron
 1. Open the AWS Amplify Console.
 2. Click "Create new app" > "Deploy without Git" > Next.
 3. Name your application.
-4. Drag and drop the `nj-ai-app-build.zip` file.
+4. Drag and drop the `Interactive-ai-app-build.zip` file.
 5. Click "Deploy".
 6. Monitor the deployment process.
 7. Use the provided URL to access your hosted React app.
